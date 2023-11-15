@@ -11,58 +11,58 @@ public class GetService : IGetService
     {
         _getRepository = getRepository;
     }
-    public Task<List<Assignment>> Assignments()
+    public async Task<List<Assignment>> Assignments()
     {
-        return _getRepository.Assignments();
+        return await _getRepository.Assignments();
     }
 
-    public Task<List<Attendance>> Attendances()
+    public async Task<List<Attendance>> Attendances()
     {
-        return _getRepository.Attendances();
+        return await _getRepository.Attendances();
     }
 
-    public Task<List<Course>> Courses()
+    public async Task<List<Course>> Courses()
     {
-        return _getRepository.Courses();
+        return await _getRepository.Courses();
     }
 
-    public Task<List<Enrollment>> Enrollments()
+    public async Task<List<Enrollment>> Enrollments()
     {
-        return _getRepository.Enrollments();
+        return await _getRepository.Enrollments();
     }
 
-    public Task<List<Period>> Periods()
+    public async Task<List<Period>> Periods()
     {
-        return _getRepository.Periods();
+        return await _getRepository.Periods();
     }
 
-    public Task<List<Plancourse>> Plancourses()
+    public async Task<List<Plancourse>> Plancourses()
     {
-        return _getRepository.Plancourses();
+        return await _getRepository.Plancourses();
     }
 
-    public Task<List<Plan>> Plans()
+    public async Task<List<Plan>> Plans()
     {
-        return _getRepository.Plans();
+        return await _getRepository.Plans();
     }
 
-    public Task<List<Program>> Programs()
+    public async Task<List<Program>> Programs()
     {
-        return _getRepository.Programs();
+        return await _getRepository.Programs();
     }
 
-    public Task<List<Section>> Sections()
+    public async Task<List<Section>> Sections()
     {
-        return _getRepository.Sections();
+        return await _getRepository.Sections();
     }
 
-    public Task<List<Userassignment>> Userassignments()
+    public async Task<List<Userassignment>> Userassignments()
     {
-        return _getRepository.Userassignments();
+        return await _getRepository.Userassignments();
     }
 
-    public Task<List<User>> Users()
+    public async Task<List<User>> Users()
     {
-        return _getRepository.Users();
+        return await _getRepository.Users();
     }
 }

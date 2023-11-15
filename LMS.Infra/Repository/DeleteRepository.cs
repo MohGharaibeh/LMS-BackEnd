@@ -28,11 +28,18 @@ public class DeleteRepository : IDeleteRepository
         using (var connection = new OracleConnection(connectionString))
         {
             await connection.OpenAsync();
+
             var p = new DynamicParameters();
-            p.Add("p_assignmentid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_assignmentid", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
+
             var result = _context.Connection.Execute("AssignmentPackage.DeleteAssignment",
                 p, commandType: CommandType.StoredProcedure);
+
             connection.Close();
+
             return result;
         }
     }
@@ -42,11 +49,18 @@ public class DeleteRepository : IDeleteRepository
         using (var connection = new OracleConnection(connectionString))
         {
             await connection.OpenAsync();
+
             var p = new DynamicParameters();
-            p.Add("p_attendenceid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_attendenceid", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
+
             var result = _context.Connection.Execute("AttendancePackage.DeleteAttendence",
                 p, commandType: CommandType.StoredProcedure);
+
             connection.Close();
+
             return result;
         }
     }
@@ -57,11 +71,18 @@ public class DeleteRepository : IDeleteRepository
         using (var connection = new OracleConnection(connectionString))
         {
             await connection.OpenAsync();
+
             var p = new DynamicParameters();
-            p.Add("p_courseid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_courseid", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
+
             var result = _context.Connection.Execute("CoursePackage.DeleteCourse",
                 p, commandType: CommandType.StoredProcedure);
+
             connection.Close();
+
             return result;
         }
     }
@@ -71,11 +92,18 @@ public class DeleteRepository : IDeleteRepository
         using (var connection = new OracleConnection(connectionString))
         {
             await connection.OpenAsync();
+
             var p = new DynamicParameters();
-            p.Add("p_enrollmentid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_enrollmentid", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
+
             var result = _context.Connection.Execute("EnrollmentPackage.DeleteEnrollment",
                 p, commandType: CommandType.StoredProcedure);
+
             connection.Close();
+
             return result;
         }
     }
@@ -85,11 +113,18 @@ public class DeleteRepository : IDeleteRepository
         using (var connection = new OracleConnection(connectionString))
         {
             await connection.OpenAsync();
+
             var p = new DynamicParameters();
-            p.Add("p_periodid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_periodid", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
+
             var result = _context.Connection.Execute("PeriodPackage.DeletePeriod",
                 p, commandType: CommandType.StoredProcedure);
+
             connection.Close();
+
             return result;
         }
     }
@@ -99,11 +134,18 @@ public class DeleteRepository : IDeleteRepository
         using (var connection = new OracleConnection(connectionString))
         {
             await connection.OpenAsync();
+
             var p = new DynamicParameters();
-            p.Add("p_PlanCourseid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_PlanCourseid", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
+
             var result = _context.Connection.Execute("PlanCoursePackage.DeletePlanCourse",
                 p, commandType: CommandType.StoredProcedure);
+
             connection.Close();
+
             return result;
         }
     }
@@ -113,11 +155,18 @@ public class DeleteRepository : IDeleteRepository
         using (var connection = new OracleConnection(connectionString))
         {
             await connection.OpenAsync();
+
             var p = new DynamicParameters();
-            p.Add("p_planid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_planid", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
+
             var result = _context.Connection.Execute("PlanPackage.DeletePlan",
                 p, commandType: CommandType.StoredProcedure);
+
             connection.Close();
+
             return result;
         }
     }
@@ -127,11 +176,18 @@ public class DeleteRepository : IDeleteRepository
         using (var connection = new OracleConnection(connectionString))
         {
             await connection.OpenAsync();
+
             var p = new DynamicParameters();
-            p.Add("p_programid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_programid", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
+
             var result = _context.Connection.Execute("ProgramPackage.DeleteProgram",
                 p, commandType: CommandType.StoredProcedure);
+
             connection.Close();
+
             return result;
         }
     }
@@ -141,11 +197,18 @@ public class DeleteRepository : IDeleteRepository
         using (var connection = new OracleConnection(connectionString))
         {
             await connection.OpenAsync();
+
             var p = new DynamicParameters();
-            p.Add("p_sectionid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_sectionid", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
+
             var result = _context.Connection.Execute("SectionPackage.DeleteSection",
                 p, commandType: CommandType.StoredProcedure);
+
             connection.Close();
+
             return result;
         }
     }
@@ -155,11 +218,18 @@ public class DeleteRepository : IDeleteRepository
         using (var connection = new OracleConnection(connectionString))
         {
             await connection.OpenAsync();
+
             var p = new DynamicParameters();
-            p.Add("p_userassignmentid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_userassignmentid", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
+
             var result = _context.Connection.Execute("UserAssignmentPackage.DeleteUserAssignment",
                 p, commandType: CommandType.StoredProcedure);
+
             connection.Close();
+
             return result;
         }
     }
@@ -169,11 +239,18 @@ public class DeleteRepository : IDeleteRepository
         using (var connection = new OracleConnection(connectionString))
         {
             await connection.OpenAsync();
+
             var p = new DynamicParameters();
-            p.Add("p_userassignmentid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_userId", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
+
             var result = _context.Connection.Execute("UsersPackage.DeleteUsers",
                 p, commandType: CommandType.StoredProcedure);
+
             connection.Close();
+
             return result;
         }
     }

@@ -31,7 +31,9 @@ public class GetIdRepository : IGetIdRepository
             await connection.OpenAsync();
             
             var p = new DynamicParameters();
-            p.Add("p_assignmentid", id, dbType:DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("p_assignmentid", id, 
+                dbType:DbType.Int32, 
+                direction: ParameterDirection.Input);
 
             var result = _dbContext.Connection.Query<Assignment>
                 ("AssignmentPackage.GetAssignmentByID", p, 
@@ -50,10 +52,13 @@ public class GetIdRepository : IGetIdRepository
             await connection.OpenAsync();
 
             var p = new DynamicParameters();
-            p.Add("p_attendanceid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_attendenceid", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
 
             var result = _dbContext.Connection.Query<Attendance>
-                ("AttendancePackage.GetAttendanceByID", p,
+                ("AttendancePackage.GetAttendenceByID", p,
                 commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -69,7 +74,10 @@ public class GetIdRepository : IGetIdRepository
             await connection.OpenAsync();
 
             var p = new DynamicParameters();
-            p.Add("p_courseid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_courseid", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
 
             var result = _dbContext.Connection.Query<Course>
                 ("CoursePackage.GetCourseByID", p,
@@ -88,7 +96,10 @@ public class GetIdRepository : IGetIdRepository
             await connection.OpenAsync();
 
             var p = new DynamicParameters();
-            p.Add("p_enrollmentid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_enrollmentid", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
 
             var result = _dbContext.Connection.Query<Enrollment>
                 ("EnrollmentPackage.GetEnrollmentByID", p,
@@ -107,7 +118,10 @@ public class GetIdRepository : IGetIdRepository
             await connection.OpenAsync();
 
             var p = new DynamicParameters();
-            p.Add("p_periodid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_periodid", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
 
             var result = _dbContext.Connection.Query<Period>
                 ("PeriodPackage.GetPeriodByID", p,
@@ -126,7 +140,10 @@ public class GetIdRepository : IGetIdRepository
             await connection.OpenAsync();
 
             var p = new DynamicParameters();
-            p.Add("p_PlanCourseid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_PlanCourseid", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
 
             var result = _dbContext.Connection.Query<Plancourse>
                 ("PlanCoursePackage.GetPlanCourseByID", p,
@@ -145,7 +162,10 @@ public class GetIdRepository : IGetIdRepository
             await connection.OpenAsync();
 
             var p = new DynamicParameters();
-            p.Add("p_Planid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_Planid", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
 
             var result = _dbContext.Connection.Query<Plan>
                 ("PlanPackage.GetPlanByID", p,
@@ -164,7 +184,10 @@ public class GetIdRepository : IGetIdRepository
             await connection.OpenAsync();
 
             var p = new DynamicParameters();
-            p.Add("p_Programid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_Programid", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
 
             var result = _dbContext.Connection.Query<Program>
                 ("ProgramPackage.GetProgramByID", p,
@@ -183,7 +206,10 @@ public class GetIdRepository : IGetIdRepository
             await connection.OpenAsync();
 
             var p = new DynamicParameters();
-            p.Add("p_Sectionid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_Sectionid", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
 
             var result = _dbContext.Connection.Query<Section>
                 ("SectionPackage.GetSectionByID", p,
@@ -202,7 +228,10 @@ public class GetIdRepository : IGetIdRepository
             await connection.OpenAsync();
 
             var p = new DynamicParameters();
-            p.Add("p_userassignmentid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_userassignmentid", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
 
             var result = _dbContext.Connection.Query<Userassignment>
                 ("UserAssignmentPackage.GetUserAssignmentByID", p,
@@ -221,7 +250,10 @@ public class GetIdRepository : IGetIdRepository
             await connection.OpenAsync();
 
             var p = new DynamicParameters();
-            p.Add("p_userId", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            p.Add("p_userId", id, 
+                dbType: DbType.Int32, 
+                direction: ParameterDirection.Input);
 
             var result = _dbContext.Connection.Query<User>
                 ("UsersPackage.GetUsersByID", p,

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace LMS.Data.Data;
 
 public partial class Userassignment

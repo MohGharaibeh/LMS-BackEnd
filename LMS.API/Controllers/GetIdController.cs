@@ -23,14 +23,14 @@ namespace LMS.API.Controllers
         }
 
         [HttpGet]
-        [Route("Attendances")]
+        [Route("Attendances/{id}")]
         public async Task<Attendance> Attendances(int id)
         {
             return await _getIdService.Attendances(id);
         }
 
         [HttpGet]
-        [Route("Courses")]
+        [Route("Courses/{id}")]
         public async Task<Course> Courses(int id)
         {
             return await _getIdService.Courses(id);

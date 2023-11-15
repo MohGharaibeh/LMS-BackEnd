@@ -33,6 +33,12 @@ public class Program
         builder.Services.AddScoped<IGetIdRepository, GetIdRepository>();
         builder.Services.AddScoped<IGetIdService, GetIdService>();
 
+        builder.Services.AddScoped<ICreateRepository, CreateRepository>();
+        builder.Services.AddScoped<ICreateService, CreateService>();
+
+        builder.Services.AddScoped<IUpdateRepository, UpdateRepository>();
+        builder.Services.AddScoped<IUpdateService, UpdateService>();
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.

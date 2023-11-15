@@ -8,6 +8,8 @@ public partial class Course
     public decimal Courseid { get; set; }
 
     public string? Name { get; set; }
+    public string? Imagepath { get; set; }
+
 
     public virtual ICollection<Plancourse> Plancourses { get; set; } = new List<Plancourse>();
 

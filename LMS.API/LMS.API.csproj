@@ -30,4 +30,8 @@
     <ProjectReference Include="..\LMS.Infra\LMS.Infra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+
 </Project>

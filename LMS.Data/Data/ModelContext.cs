@@ -81,7 +81,8 @@ public partial class ModelContext : DbContext
 
             entity.HasOne(d => d.Section).WithMany(p => p.Assignments)
                 .HasForeignKey(d => d.Sectionid)
-                .HasConstraintName("SYS_C008466");
+                .HasConstraintName("SYS_C008466")
+                .OnDelete(deleteBehavior: DeleteBehavior.Cascade);
         });
 
         modelBuilder.Entity<Attendance>(entity =>
@@ -110,11 +111,13 @@ public partial class ModelContext : DbContext
 
             entity.HasOne(d => d.Section).WithMany(p => p.Attendances)
                 .HasForeignKey(d => d.Sectionid)
-                .HasConstraintName("SYS_C008469");
+                .HasConstraintName("SYS_C008469")
+                .OnDelete(deleteBehavior: DeleteBehavior.Cascade);
 
             entity.HasOne(d => d.User).WithMany(p => p.Attendances)
                 .HasForeignKey(d => d.Userid)
-                .HasConstraintName("SYS_C008470");
+                .HasConstraintName("SYS_C008470")
+                .OnDelete(deleteBehavior: DeleteBehavior.Cascade);
         });
 
         modelBuilder.Entity<Course>(entity =>
@@ -127,10 +130,16 @@ public partial class ModelContext : DbContext
                 .ValueGeneratedOnAdd()
                 .HasColumnType("NUMBER(38)")
                 .HasColumnName("COURSEID");
+
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("NAME");
+
+            entity.Property(e => e.Imagepath)
+                .HasMaxLength(1000)
+                .IsUnicode(false)
+                .HasColumnName("IMAGEPATH");
         });
 
         modelBuilder.Entity<Enrollment>(entity =>
@@ -159,11 +168,13 @@ public partial class ModelContext : DbContext
 
             entity.HasOne(d => d.Section).WithMany(p => p.Enrollments)
                 .HasForeignKey(d => d.Sectionid)
-                .HasConstraintName("SYS_C008474");
+                .HasConstraintName("SYS_C008474")
+                .OnDelete(deleteBehavior: DeleteBehavior.Cascade);
 
             entity.HasOne(d => d.User).WithMany(p => p.Enrollments)
                 .HasForeignKey(d => d.Userid)
-                .HasConstraintName("SYS_C008473");
+                .HasConstraintName("SYS_C008473")
+                .OnDelete(deleteBehavior: DeleteBehavior.Cascade);
         });
 
         modelBuilder.Entity<Period>(entity =>
@@ -208,7 +219,8 @@ public partial class ModelContext : DbContext
 
             entity.HasOne(d => d.Program).WithMany(p => p.Plans)
                 .HasForeignKey(d => d.Programid)
-                .HasConstraintName("SYS_C008449");
+                .HasConstraintName("SYS_C008449")
+                .OnDelete(deleteBehavior: DeleteBehavior.Cascade);
         });
 
         modelBuilder.Entity<Plancourse>(entity =>
@@ -243,11 +255,13 @@ public partial class ModelContext : DbContext
 
             entity.HasOne(d => d.Course).WithMany(p => p.Plancourses)
                 .HasForeignKey(d => d.Courseid)
-                .HasConstraintName("SYS_C008455");
+                .HasConstraintName("SYS_C008455")
+                .OnDelete(deleteBehavior: DeleteBehavior.Cascade);
 
             entity.HasOne(d => d.Plan).WithMany(p => p.Plancourses)
                 .HasForeignKey(d => d.Planid)
-                .HasConstraintName("SYS_C008454");
+                .HasConstraintName("SYS_C008454")
+                .OnDelete(deleteBehavior: DeleteBehavior.Cascade);
         });
 
         modelBuilder.Entity<Program>(entity =>
@@ -274,7 +288,8 @@ public partial class ModelContext : DbContext
 
             entity.HasOne(d => d.Period).WithMany(p => p.Programs)
                 .HasForeignKey(d => d.Periodid)
-                .HasConstraintName("SYS_C008446");
+                .HasConstraintName("SYS_C008446")
+                .OnDelete(deleteBehavior: DeleteBehavior.Cascade);
         });
 
         modelBuilder.Entity<Role>(entity =>
@@ -319,11 +334,13 @@ public partial class ModelContext : DbContext
 
             entity.HasOne(d => d.Course).WithMany(p => p.Sections)
                 .HasForeignKey(d => d.Courseid)
-                .HasConstraintName("SYS_C008462");
+                .HasConstraintName("SYS_C008462")
+                .OnDelete(deleteBehavior: DeleteBehavior.Cascade);
 
             entity.HasOne(d => d.User).WithMany(p => p.Sections)
                 .HasForeignKey(d => d.Userid)
-                .HasConstraintName("SYS_C008463");
+                .HasConstraintName("SYS_C008463")
+                .OnDelete(deleteBehavior: DeleteBehavior.Cascade);
         });
 
         modelBuilder.Entity<User>(entity =>
@@ -369,11 +386,13 @@ public partial class ModelContext : DbContext
 
             entity.HasOne(d => d.Plan).WithMany(p => p.Users)
                 .HasForeignKey(d => d.Planid)
-                .HasConstraintName("SYS_C008459");
+                .HasConstraintName("SYS_C008459")
+                .OnDelete(deleteBehavior: DeleteBehavior.Cascade);
 
             entity.HasOne(d => d.Role).WithMany(p => p.Users)
                 .HasForeignKey(d => d.Roleid)
-                .HasConstraintName("SYS_C008458");
+                .HasConstraintName("SYS_C008458")
+                .OnDelete(deleteBehavior: DeleteBehavior.Cascade);
         });
 
         modelBuilder.Entity<Userassignment>(entity =>
@@ -402,11 +421,13 @@ public partial class ModelContext : DbContext
 
             entity.HasOne(d => d.Assignment).WithMany(p => p.Userassignments)
                 .HasForeignKey(d => d.Assignmentid)
-                .HasConstraintName("SYS_C008477");
+                .HasConstraintName("SYS_C008477")
+                .OnDelete(deleteBehavior: DeleteBehavior.Cascade);
 
             entity.HasOne(d => d.User).WithMany(p => p.Userassignments)
                 .HasForeignKey(d => d.Userid)
-                .HasConstraintName("SYS_C008478");
+                .HasConstraintName("SYS_C008478")
+                .OnDelete(deleteBehavior: DeleteBehavior.Cascade);
         });
 
         OnModelCreatingPartial(modelBuilder);

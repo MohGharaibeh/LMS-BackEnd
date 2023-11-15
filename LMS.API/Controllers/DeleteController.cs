@@ -16,78 +16,78 @@ public class DeleteController : ControllerBase
 
     [HttpDelete]
     [Route("Assignments/{id}")]
-    public Task<int> Assignments(int id)
+    public async Task<int> Assignments(int id)
     {
-        return _deleteService.Assignments(id);
+        return await _deleteService.Assignments(id);
     }
 
     [HttpDelete]
     [Route("Attendances/{id}")]
-    public Task<int> Attendances(int id)
+    public async Task<int> Attendances(int id)
     {
-        return _deleteService.Attendances(id);
+        return await _deleteService.Attendances(id);
     }
 
     [HttpDelete]
     [Route("Courses/{id}")]
-    public Task<int> Courses(int id)
+    public async Task<int> Courses(int id)
     {
-        return _deleteService.Courses(id);
+        return await _deleteService.Courses(id);
     }
 
     [HttpDelete]
     [Route("Enrollments/{id}")]
-    public Task<int> Enrollments(int id)
+    public async Task<int> Enrollments(int id)
     {
-        return _deleteService.Enrollments(id);
+        return await _deleteService.Enrollments(id);
     }
 
     [HttpDelete]
     [Route("Periods/{id}")]
-    public Task<int> Periods(int id)
+    public async Task<int> Periods(int id)
     {
-        return _deleteService.Periods(id);
+        return await _deleteService.Periods(id);
     }
 
     [HttpDelete]
     [Route("Plancourses/{id}")]
-    public Task<int> Plancourses(int id)
+    public async Task<int> Plancourses(int id)
     {
-        return _deleteService.Plancourses(id);
+        return await _deleteService.Plancourses(id);
     }
 
     [HttpDelete]
     [Route("Plans/{id}")]
-    public Task<int> Plans(int id)
+    public async Task<int> Plans(int id)
     {
-        return _deleteService.Plans(id);
+        return await _deleteService.Plans(id);
     }
 
     [HttpDelete]
     [Route("Programs/{id}")]
-    public Task<int> Programs(int id)
+    public async Task<int> Programs(int id)
     {
-        return _deleteService.Programs(id);
+        return await _deleteService.Programs(id);
     }
 
     [HttpDelete]
     [Route("Sections/{id}")]
-    public Task<int> Sections(int id)
+    public async Task<int> Sections(int id)
     {
-        return _deleteService.Sections(id);
+        return await _deleteService.Sections(id);
     }
 
     [HttpDelete]
     [Route("Userassignments/{id}")]
-    public Task<int> Userassignments(int id)
+    public async Task<int> Userassignments(int id)
     {
-        return _deleteService.Userassignments(id);
+        return await _deleteService.Userassignments(id);
     }
 
     [HttpDelete]
     [Route("Users/{id}")]
-    public Task<int> Users(int id)
+    public async Task<int> Users(int id)
     {
-        return _deleteService.Users(id);
+        return await _deleteService.Users(id);
     }
 }
