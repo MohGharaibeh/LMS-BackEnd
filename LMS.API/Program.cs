@@ -1,6 +1,8 @@
 
+using LMS.Core.Common;
 using LMS.Core.Repository;
 using LMS.Core.Service;
+using LMS.Infra.Common;
 using LMS.Infra.Repository;
 using LMS.Infra.Service;
 using System.Configuration;
@@ -19,8 +21,17 @@ public class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
+        builder.Services.AddScoped<IDbContext, DbContext>();
+
         builder.Services.AddScoped<IGetRepository, GetRepository>();
         builder.Services.AddScoped<IGetService, GetService>();
+
+        builder.Services.AddScoped<IDeleteRepository, DeleteRepository>();
+        builder.Services.AddScoped<IDeleteService, DeleteService>();
+
+        builder.Services.AddScoped<IGetIdRepository, GetIdRepository>();
+        builder.Services.AddScoped<IGetIdService, GetIdService>();
 
         var app = builder.Build();
 
