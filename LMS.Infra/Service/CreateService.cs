@@ -68,4 +68,9 @@ public class CreateService : ICreateService
     {
         await _createRepository.Users(user);
     }
+
+    public async Task<User> LoginUsers(User user)
+    {
+        return await _createRepository.LoginUsers(user);
+    }
 }

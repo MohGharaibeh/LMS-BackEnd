@@ -364,4 +364,29 @@ public class CreateRepository : ICreateRepository
             connection.Close();
         }
     }
+
+    public async Task<User> LoginUsers(User user)
+    {
+        using (var connection = new OracleConnection(connectionString))
+        {
+            await connection.OpenAsync();
+
+            var p = new DynamicParameters();
+
+            p.Add("p_email", user.Email,
+                dbType: DbType.String,
+                direction: ParameterDirection.Input);
+
+            p.Add("p_password", user.Password,
+                dbType: DbType.String,
+                direction: ParameterDirection.Input);
+
+            var result = _dbContext.Connection.Query<User>("UsersPackage.LoginUser",
+                p, commandType: CommandType.StoredProcedure);
+
+            connection.Close();
+
+            return result.SingleOrDefault();
+        }
+    }
 }

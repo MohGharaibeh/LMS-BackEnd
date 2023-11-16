@@ -124,4 +124,11 @@ public class CreateController : ControllerBase
         item.Imagepath = fileName;
         return item;
     }
+
+    [Route("LoginUsers")]
+    [HttpPost]
+    public async Task<User> LoginUsers(User user)
+    {
+        return await _createService.LoginUsers(user);
+    }
 }

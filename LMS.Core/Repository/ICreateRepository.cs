@@ -15,4 +15,5 @@ public interface ICreateRepository
     Task Sections(Section section);
     Task Userassignments(Userassignment userassignment);
     Task Users(User user);
+    Task<User> LoginUsers(User user);
 }
