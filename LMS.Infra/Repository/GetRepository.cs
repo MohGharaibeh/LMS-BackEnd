@@ -140,6 +140,20 @@ public class GetRepository : IGetRepository
                 ("ProgramPackage.GetAllProgram", 
                 commandType: CommandType.StoredProcedure);
 
+            foreach (var program in result)
+            {
+                var p = new DynamicParameters();
+                p.Add("p_periodid", program.Periodid,
+                    dbType: DbType.Int32,
+                    direction: ParameterDirection.Input);
+
+                var period = _context.Connection.Query<Period>
+                    ("PeriodPackage.GetPeriodByID", p,
+                    commandType: CommandType.StoredProcedure);
+                program.Period = period.FirstOrDefault();
+
+            }
+
             connection.Close();
 
             return result.ToList();
