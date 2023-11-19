@@ -203,7 +203,7 @@ public class CreateRepository : ICreateRepository
                 direction: ParameterDirection.Input);
 
             p.Add("p_prerequest", plancourse.Prerequest,
-                dbType: DbType.String,
+                dbType: DbType.Int32,
                 direction: ParameterDirection.Input);
 
             p.Add("p_enddate", plancourse.Enddate,

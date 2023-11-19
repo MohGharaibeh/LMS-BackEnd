@@ -157,23 +157,59 @@ public class GetIdRepository : IGetIdRepository
 
     public async Task<Plan> Plans(int id)
     {
+        //using (var connection = new OracleConnection(connectionString))
+        //{
+        //    await connection.OpenAsync();
+
+        //    var p = new DynamicParameters();
+
+        //    p.Add("p_Planid", id, 
+        //        dbType: DbType.Int32, 
+        //        direction: ParameterDirection.Input);
+
+        //    var result = _dbContext.Connection.Query<Plan>
+        //        ("PlanPackage.GetPlanByID", p,
+        //        commandType: CommandType.StoredProcedure);
+
+        //    connection.Close();
+
+        //    return result.FirstOrDefault();
+        //}
+
         using (var connection = new OracleConnection(connectionString))
         {
             await connection.OpenAsync();
 
             var p = new DynamicParameters();
+            p.Add("p_Planid", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
-            p.Add("p_Planid", id, 
-                dbType: DbType.Int32, 
-                direction: ParameterDirection.Input);
+            var plan = (await connection.QueryAsync<Plan>("PlanPackage.GetPlanByID", p, commandType: CommandType.StoredProcedure)).FirstOrDefault();
 
-            var result = _dbContext.Connection.Query<Plan>
-                ("PlanPackage.GetPlanByID", p,
-                commandType: CommandType.StoredProcedure);
+            if (plan != null)
+            {
+                var courses = await connection.QueryAsync<Plancourse>(
+                    "SELECT * FROM Plancourse WHERE Planid = :PlanId",
+                    new { PlanId = plan.Planid });
+                foreach (var course in courses)
+                {
+                     p = new DynamicParameters();
+
+                    p.Add("p_courseid", course.Courseid,
+                        dbType: DbType.Int32,
+                        direction: ParameterDirection.Input);
+
+                    var result = _dbContext.Connection.Query<Course>
+                        ("CoursePackage.GetCourseByID", p,
+                        commandType: CommandType.StoredProcedure);
+                    course.Course = result.FirstOrDefault();
+
+                }
+                plan.Plancourses = courses.ToList();
+            }
 
             connection.Close();
 
-            return result.FirstOrDefault();
+            return plan;
         }
     }
 

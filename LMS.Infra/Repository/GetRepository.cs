@@ -124,6 +124,32 @@ public class GetRepository : IGetRepository
                 ("PlanPackage.GetAllPlan", 
                 commandType: CommandType.StoredProcedure);
 
+            foreach (var plan in result)
+            {
+                
+
+                var p = new DynamicParameters();
+
+                p.Add("p_Programid", plan.Programid,
+                    dbType: DbType.Int32,
+                    direction: ParameterDirection.Input);
+
+                var programs = _context.Connection.Query<Program>
+                    ("ProgramPackage.GetProgramByID", p,
+                    commandType: CommandType.StoredProcedure);
+                plan.Program = programs.FirstOrDefault();
+
+                 p = new DynamicParameters();
+                p.Add("p_periodid", plan.Program.Periodid,
+                    dbType: DbType.Int32,
+                    direction: ParameterDirection.Input);
+
+                var period = _context.Connection.Query<Period>
+                    ("PeriodPackage.GetPeriodByID", p,
+                    commandType: CommandType.StoredProcedure);
+                plan.Program.Period = period.FirstOrDefault();
+            }
+
             connection.Close();
 
             return result.ToList();
@@ -201,6 +227,43 @@ public class GetRepository : IGetRepository
             IEnumerable<User> result = _context.Connection.Query<User>
                 ("UsersPackage.GetAllUsers", 
                 commandType: CommandType.StoredProcedure);
+
+            connection.Close();
+
+            return result.ToList();
+        }
+    }
+
+    public async Task<List<Section>> SectionForInstructor(int userId)
+    {
+        using (var connection = new OracleConnection(connectionString))
+        {
+            await connection.OpenAsync();
+
+            var p = new DynamicParameters();
+
+            p.Add("p_userid", userId,
+                dbType: DbType.Int32,
+                direction: ParameterDirection.Input);
+
+            IEnumerable<Section> result = _context.Connection.Query<Section>
+                ("SectionPackage.GetSectionForInstructor", p,
+                commandType: CommandType.StoredProcedure);
+
+            foreach (var section in result)
+            {
+                var x = new DynamicParameters();
+
+                x.Add("p_courseid", section.Courseid,
+                    dbType: DbType.Int32,
+                    direction: ParameterDirection.Input);
+
+                IEnumerable<Course> course = _context.Connection.Query<Course>
+                ("CoursePackage.GetCourseByID", x,
+                commandType: CommandType.StoredProcedure);
+
+                section.Course = course.FirstOrDefault();
+            }
 
             connection.Close();
 
