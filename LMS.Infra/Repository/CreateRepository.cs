@@ -2,7 +2,6 @@
 using LMS.Core.Common;
 using LMS.Core.Repository;
 using LMS.Data.Data;
-using LMS.Infra.Common;
 using Microsoft.Extensions.Configuration;
 using Oracle.ManagedDataAccess.Client;
 using System.Data;
@@ -48,7 +47,8 @@ public class CreateRepository : ICreateRepository
                 dbType: DbType.Decimal,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("AssignmentPackage.createAssignment", 
+            var result = _dbContext.Connection.Execute
+                ("AssignmentPackage.createAssignment", 
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -79,7 +79,8 @@ public class CreateRepository : ICreateRepository
                 dbType: DbType.Decimal,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("AttendancePackage.createAttendence",
+            var result = _dbContext.Connection.Execute
+                ("AttendancePackage.createAttendence",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -102,7 +103,8 @@ public class CreateRepository : ICreateRepository
                 dbType: DbType.String,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("CoursePackage.createCourse",
+            var result = _dbContext.Connection.Execute
+                ("CoursePackage.createCourse",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -133,7 +135,8 @@ public class CreateRepository : ICreateRepository
                 dbType: DbType.Decimal,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("EnrollmentPackage.createEnrollment",
+            var result = _dbContext.Connection.Execute
+                ("EnrollmentPackage.createEnrollment",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -160,7 +163,8 @@ public class CreateRepository : ICreateRepository
                 dbType: DbType.DateTime,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("PeriodPackage.createPeriod",
+            var result = _dbContext.Connection.Execute
+                ("PeriodPackage.createPeriod",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -183,7 +187,8 @@ public class CreateRepository : ICreateRepository
                 dbType: DbType.Decimal,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("PlanPackage.createPlan",
+            var result = _dbContext.Connection.Execute
+                ("PlanPackage.createPlan",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -222,7 +227,8 @@ public class CreateRepository : ICreateRepository
                 dbType: DbType.Decimal,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("PlanCoursePackage.createPlanCourse",
+            var result = _dbContext.Connection.Execute
+                ("PlanCoursePackage.createPlanCourse",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -249,7 +255,8 @@ public class CreateRepository : ICreateRepository
                 dbType: DbType.Decimal,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("ProgramPackage.createProgram",
+            var result = _dbContext.Connection.Execute
+                ("ProgramPackage.createProgram",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -280,7 +287,12 @@ public class CreateRepository : ICreateRepository
                 dbType: DbType.Decimal,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("SectionPackage.createSection",
+            p.Add("p_plancourseid", section.Plancourseid,
+               dbType: DbType.Decimal,
+               direction: ParameterDirection.Input);
+
+            var result = _dbContext.Connection.Execute
+                ("SectionPackage.createSection",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -311,7 +323,8 @@ public class CreateRepository : ICreateRepository
                 dbType: DbType.Decimal,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("UserAssignmentPackage.createUserAssignment",
+            var result = _dbContext.Connection.Execute
+                ("UserAssignmentPackage.createUserAssignment",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -358,7 +371,8 @@ public class CreateRepository : ICreateRepository
                 dbType: DbType.Decimal,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("UsersPackage.createUsers",
+            var result = _dbContext.Connection.Execute
+                ("UsersPackage.createUsers",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -381,7 +395,8 @@ public class CreateRepository : ICreateRepository
                 dbType: DbType.String,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Query<User>("UsersPackage.LoginUser",
+            var result = _dbContext.Connection.Query<User>
+                ("UsersPackage.LoginUser",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();

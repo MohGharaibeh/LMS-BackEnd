@@ -1,9 +1,7 @@
-﻿
-using Dapper;
+﻿using Dapper;
 using LMS.Core.Common;
 using LMS.Core.Repository;
 using LMS.Data.Data;
-using LMS.Infra.Common;
 using Microsoft.Extensions.Configuration;
 using Oracle.ManagedDataAccess.Client;
 using System.Data;
@@ -53,7 +51,8 @@ public class UpdateRepository : IUpdateRepository
                 dbType: DbType.Decimal,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("AssignmentPackage.UpdateAssignment",
+            var result = _dbContext.Connection.Execute
+                ("AssignmentPackage.UpdateAssignment",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -88,7 +87,8 @@ public class UpdateRepository : IUpdateRepository
                 dbType: DbType.Decimal,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("AttendancePackage.UpdateAttendence",
+            var result = _dbContext.Connection.Execute
+                ("AttendancePackage.UpdateAttendence",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -115,7 +115,8 @@ public class UpdateRepository : IUpdateRepository
                 dbType: DbType.String,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("CoursePackage.UpdateCourse",
+            var result = _dbContext.Connection.Execute
+                ("CoursePackage.UpdateCourse",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -150,7 +151,8 @@ public class UpdateRepository : IUpdateRepository
                 dbType: DbType.Decimal,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("EnrollmentPackage.UpdateEnrollment",
+            var result = _dbContext.Connection.Execute
+                ("EnrollmentPackage.UpdateEnrollment",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -181,7 +183,8 @@ public class UpdateRepository : IUpdateRepository
                 dbType: DbType.DateTime,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("PeriodPackage.UpdatePeriod",
+            var result = _dbContext.Connection.Execute
+                ("PeriodPackage.UpdatePeriod",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -208,7 +211,8 @@ public class UpdateRepository : IUpdateRepository
                 dbType: DbType.Decimal,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("PlanPackage.UpdatePlan",
+            var result = _dbContext.Connection.Execute
+                ("PlanPackage.UpdatePlan",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -251,7 +255,8 @@ public class UpdateRepository : IUpdateRepository
                 dbType: DbType.Decimal,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("PlanCoursePackage.UpdatePlanCourse",
+            var result = _dbContext.Connection.Execute
+                ("PlanCoursePackage.UpdatePlanCourse",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -282,7 +287,8 @@ public class UpdateRepository : IUpdateRepository
                 dbType: DbType.Decimal,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("ProgramPackage.UpdateProgram",
+            var result = _dbContext.Connection.Execute
+                ("ProgramPackage.UpdateProgram",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -317,7 +323,12 @@ public class UpdateRepository : IUpdateRepository
                 dbType: DbType.Decimal,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("SectionPackage.UpdateSection",
+            p.Add("p_plancourseid", section.Plancourseid,
+               dbType: DbType.Decimal,
+               direction: ParameterDirection.Input);
+
+            var result = _dbContext.Connection.Execute
+                ("SectionPackage.UpdateSection",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -352,7 +363,8 @@ public class UpdateRepository : IUpdateRepository
                 dbType: DbType.Decimal,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("UserAssignmentPackage.UpdateUserAssignment",
+            var result = _dbContext.Connection.Execute
+                ("UserAssignmentPackage.UpdateUserAssignment",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
@@ -403,7 +415,8 @@ public class UpdateRepository : IUpdateRepository
                 dbType: DbType.Decimal,
                 direction: ParameterDirection.Input);
 
-            var result = _dbContext.Connection.Execute("UsersPackage.UpdateUsers",
+            var result = _dbContext.Connection.Execute
+                ("UsersPackage.UpdateUsers",
                 p, commandType: CommandType.StoredProcedure);
 
             connection.Close();
