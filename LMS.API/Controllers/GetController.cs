@@ -91,4 +91,11 @@ public class GetController : ControllerBase
     {
         return await _getService.Users();
     }
+
+    [HttpGet]
+    [Route("SectionForInstructor/{userId}")]
+    public async Task<List<Section>> SectionForInstructor(int userId)
+    {
+        return await _getService.SectionForInstructor(userId);
+    }
 }
