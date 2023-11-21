@@ -1,5 +1,6 @@
 ﻿using LMS.Core.Service;
 using LMS.Data.Data;
+using LMS.Data.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LMS.API.Controllers;
@@ -97,5 +98,12 @@ public class GetController : ControllerBase
     public async Task<List<Section>> SectionForInstructor(int userId)
     {
         return await _getService.SectionForInstructor(userId);
+    }
+
+    [HttpGet]
+    [Route("SectionForTrainee/{traineeId}")]
+    public async Task<List<SectionContentForUser>> SectionForTrainee(int traineeId)
+    {
+        return await _getService.SectionForTrainee(traineeId);
     }
 }

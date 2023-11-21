@@ -1,4 +1,5 @@
 ﻿using LMS.Data.Data;
+using LMS.Data.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,4 +22,5 @@ public interface IGetRepository
     Task<List<Userassignment>> Userassignments();
     Task<List<User>> Users();
     Task<List<Section>> SectionForInstructor(int userId);
+    Task<List<SectionContentForUser>> SectionForTrainee(int traineeId);
 }

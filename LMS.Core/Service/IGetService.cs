@@ -1,4 +1,5 @@
 ﻿using LMS.Data.Data;
+using LMS.Data.DTOs;
 
 namespace LMS.Core.Service;
 
@@ -16,4 +17,5 @@ public interface IGetService
     Task<List<Userassignment>> Userassignments();
     Task<List<User>> Users();
     Task<List<Section>> SectionForInstructor(int userId);
+    Task<List<SectionContentForUser>> SectionForTrainee(int traineeId);
 }

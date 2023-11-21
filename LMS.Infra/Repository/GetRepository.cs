@@ -2,6 +2,7 @@
 using LMS.Core.Common;
 using LMS.Core.Repository;
 using LMS.Data.Data;
+using LMS.Data.DTOs;
 using Microsoft.Extensions.Configuration;
 using Oracle.ManagedDataAccess.Client;
 using System.Data;
@@ -264,6 +265,29 @@ public class GetRepository : IGetRepository
 
                 section.Course = course.FirstOrDefault();
             }
+
+            connection.Close();
+
+            return result.ToList();
+        }
+    }
+
+    public async Task<List<SectionContentForUser>> SectionForTrainee(int traineeId)
+    {
+        using (var connection = new OracleConnection(connectionString))
+        {
+            await connection.OpenAsync();
+
+            var p = new DynamicParameters();
+
+            p.Add("p_userid", traineeId, 
+                dbType: DbType.Decimal, 
+                direction: ParameterDirection.Input);
+
+            IEnumerable<SectionContentForUser> result = _context.Connection
+                .Query<SectionContentForUser>
+                ("JoinTrainee.GetSectionForUser", p,
+                commandType: CommandType.StoredProcedure);
 
             connection.Close();
 

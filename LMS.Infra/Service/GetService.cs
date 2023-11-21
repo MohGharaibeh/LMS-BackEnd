@@ -1,6 +1,7 @@
 ﻿using LMS.Core.Repository;
 using LMS.Core.Service;
 using LMS.Data.Data;
+using LMS.Data.DTOs;
 
 namespace LMS.Infra.Service;
 
@@ -69,5 +70,10 @@ public class GetService : IGetService
     public async Task<List<Section>> SectionForInstructor(int userId)
     {
         return await _getRepository.SectionForInstructor(userId);
+    }
+
+    public async Task<List<SectionContentForUser>> SectionForTrainee(int traineeId)
+    {
+        return await _getRepository.SectionForTrainee(traineeId);
     }
 }
