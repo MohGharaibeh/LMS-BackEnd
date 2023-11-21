@@ -140,18 +140,38 @@ public class GetIdRepository : IGetIdRepository
             await connection.OpenAsync();
 
             var p = new DynamicParameters();
+            p.Add("p_PlanCourseid", id, DbType.Int32, ParameterDirection.Input);
 
-            p.Add("p_PlanCourseid", id, 
-                dbType: DbType.Int32, 
-                direction: ParameterDirection.Input);
+            var result = await _dbContext.Connection.QueryAsync<Plancourse>(
+                "PlanCoursePackage.GetPlanCourseByID", p, commandType: CommandType.StoredProcedure);
 
-            var result = _dbContext.Connection.Query<Plancourse>
-                ("PlanCoursePackage.GetPlanCourseByID", p,
-                commandType: CommandType.StoredProcedure);
+            var plancourse = result.FirstOrDefault();
+
+            if (plancourse != null)
+            {
+                var sections = await connection.QueryAsync<Section>(
+                    "SELECT * FROM Section WHERE Plancourseid = :p_PlanCourseid",
+                    p);
+
+                foreach (var section in sections)
+                {
+                     p = new DynamicParameters();
+
+                    p.Add("p_userId", section.Userid,
+                        dbType: DbType.Int32,
+                        direction: ParameterDirection.Input);
+
+                   section.User = _dbContext.Connection.Query<User>
+                        ("UsersPackage.GetUsersByID", p,
+                        commandType: CommandType.StoredProcedure).FirstOrDefault();
+                }
+
+                plancourse.Sections = sections.ToList();
+            }
 
             connection.Close();
 
-            return result.FirstOrDefault();
+            return plancourse;
         }
     }
 
