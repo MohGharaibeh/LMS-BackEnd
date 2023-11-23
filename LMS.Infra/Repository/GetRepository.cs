@@ -238,7 +238,7 @@ public class GetRepository : IGetRepository
         }
     }
 
-    public async Task<List<Section>> SectionForInstructor(int userId)
+    public async Task<List<SectionForInstructor>> SectionForInstructor(int userId)
     {
         using (var connection = new OracleConnection(connectionString))
         {
@@ -250,24 +250,10 @@ public class GetRepository : IGetRepository
                 dbType: DbType.Int32,
                 direction: ParameterDirection.Input);
 
-            IEnumerable<Section> result = _context.Connection.Query<Section>
+            IEnumerable<SectionForInstructor> result = _context.Connection
+                .Query<SectionForInstructor>
                 ("SectionPackage.GetSectionForInstructor", p,
                 commandType: CommandType.StoredProcedure);
-
-            foreach (var section in result)
-            {
-                var x = new DynamicParameters();
-
-                x.Add("p_courseid", section.Courseid,
-                    dbType: DbType.Int32,
-                    direction: ParameterDirection.Input);
-
-                IEnumerable<Course> course = _context.Connection.Query<Course>
-                ("CoursePackage.GetCourseByID", x,
-                commandType: CommandType.StoredProcedure);
-
-                section.Course = course.FirstOrDefault();
-            }
 
             connection.Close();
 
