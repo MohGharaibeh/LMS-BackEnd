@@ -2,6 +2,7 @@
 using LMS.Core.Common;
 using LMS.Core.Repository;
 using LMS.Data.Data;
+using LMS.Data.DTOs;
 using Microsoft.Extensions.Configuration;
 using Oracle.ManagedDataAccess.Client;
 using System;
@@ -24,7 +25,7 @@ public class GetIdRepository : IGetIdRepository
         connectionString = configuration.GetConnectionString("DefaultConnection");
     }
 
-    public async Task<Assignment> Assignments(int id)
+    public async Task<List<Assignment>> Assignments(int id)
     {
         using (var connection = new OracleConnection(connectionString))
         {
@@ -41,8 +42,46 @@ public class GetIdRepository : IGetIdRepository
 
             connection.Close();
 
-            return result.FirstOrDefault();
+            return result.ToList();
         }
+    }
+
+
+    public async Task<List<Enrollment>> EnrollmentsBySection(int id)
+    {
+
+        using (var connection = new OracleConnection(connectionString))
+        {
+            await connection.OpenAsync();
+
+            var p = new DynamicParameters();
+            p.Add("p_sectionid", id,
+                dbType: DbType.Int32,
+                direction: ParameterDirection.Input);
+
+            var result = _dbContext.Connection.Query<Enrollment>
+                ("EnrollmentPackage.GetEnrollmentBySectionID", p,
+                commandType: CommandType.StoredProcedure);
+
+            foreach (var enrollment in result)
+            {
+                 p = new DynamicParameters();
+
+                p.Add("p_userId", enrollment.Userid,
+                    dbType: DbType.Int32,
+                    direction: ParameterDirection.Input);
+
+                var user = _dbContext.Connection.Query<User>
+                    ("UsersPackage.GetUsersByID", p,
+                    commandType: CommandType.StoredProcedure);
+                enrollment.User = user.FirstOrDefault();
+            }
+
+            connection.Close();
+
+            return result.ToList();
+        }
+
     }
 
     public async Task<Attendance> Attendances(int id)
@@ -318,6 +357,28 @@ public class GetIdRepository : IGetIdRepository
             connection.Close();
 
             return result.FirstOrDefault();
+        }
+    }
+
+    public async Task <IEnumerable<StudentAssingmentsDTO>>GetUserAssignmentsBySectionId(int sectionId, int userId)
+    {
+        using (var connection = new OracleConnection(connectionString))
+        {
+            await connection.OpenAsync();
+
+            var p = new DynamicParameters();
+            p.Add("p_sectionid", sectionId, DbType.Int32, ParameterDirection.Input);
+            p.Add("p_userid", userId, DbType.Int32, ParameterDirection.Input);
+
+            var result = await _dbContext.Connection.QueryAsync<StudentAssingmentsDTO>(
+                "UserAssignmentPackage.GetUserAssignmentsBySectionId",
+                p,
+                commandType: CommandType.StoredProcedure
+            );
+
+            connection.Close();
+
+            return result;
         }
     }
 }

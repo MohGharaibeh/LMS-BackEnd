@@ -1,5 +1,6 @@
 ﻿using LMS.Core.Service;
 using LMS.Data.Data;
+using LMS.Data.DTOs;
 using LMS.Infra.Service;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +18,7 @@ namespace LMS.API.Controllers
         }
 
         [Route("Assignments/{id}")]
-        public async Task<Assignment> Assignments(int id)
+        public async Task<List<Assignment>> Assignments(int id)
         {
             return await _getIdService.Assignments(id);
         }
@@ -41,6 +42,12 @@ namespace LMS.API.Controllers
         public async Task<Enrollment> Enrollments(int id)
         {
             return await _getIdService.Enrollments(id);
+        }
+        [HttpGet]
+        [Route("EnrollmentsBySection/{id}")]
+        public async Task<List<Enrollment>> EnrollmentsBySection(int id)
+        {
+            return await _getIdService.EnrollmentsBySection(id);
         }
 
         [HttpGet]
@@ -84,6 +91,18 @@ namespace LMS.API.Controllers
         {
             return await _getIdService.Userassignments(id);
         }
+
+
+
+
+
+
+        [HttpPost("GetUserAssignmentsBySectionId")]
+        public async Task<IEnumerable<StudentAssingmentsDTO>> GetUserAssignmentsBySectionId([FromBody] UserAssignmentsRequestDTO request)
+        {
+            return await _getIdService.GetUserAssignmentsBySectionId(request.SectionId, request.UserId);
+        }
+
 
         [HttpGet]
         [Route("Users/{id}")]

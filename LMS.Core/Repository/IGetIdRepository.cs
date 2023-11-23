@@ -1,4 +1,5 @@
 ﻿using LMS.Data.Data;
+using LMS.Data.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace LMS.Core.Repository;
 
 public interface IGetIdRepository
 {
-    Task<Assignment> Assignments(int id);
+    Task<List<Assignment>> Assignments(int id);
     Task<Attendance> Attendances(int id);
     Task<Course> Courses(int id);
     Task<Enrollment> Enrollments(int id);
@@ -18,6 +19,12 @@ public interface IGetIdRepository
     Task<Plan> Plans(int id);
     Task<Program> Programs(int id);
     Task<Section> Sections(int id);
+
+    Task<List<Enrollment>> EnrollmentsBySection(int id);
+
     Task<Userassignment> Userassignments(int id);
     Task<User> Users(int id);
+
+    Task<IEnumerable<StudentAssingmentsDTO>> GetUserAssignmentsBySectionId(int sectionId, int userId);
+
 }

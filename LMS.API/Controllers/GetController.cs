@@ -86,6 +86,8 @@ public class GetController : ControllerBase
         return await _getService.Userassignments();
     }
 
+
+
     [HttpGet]
     [Route("Users")]
     public async Task<List<User>> Users()
@@ -102,7 +104,7 @@ public class GetController : ControllerBase
 
     [HttpGet]
     [Route("SectionForTrainee/{traineeId}")]
-    public async Task<List<SectionContentForUser>> SectionForTrainee(int traineeId)
+    public async Task<User> SectionForTrainee(int traineeId)
     {
         return await _getService.SectionForTrainee(traineeId);
     }

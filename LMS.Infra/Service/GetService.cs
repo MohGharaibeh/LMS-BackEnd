@@ -72,8 +72,10 @@ public class GetService : IGetService
         return await _getRepository.SectionForInstructor(userId);
     }
 
-    public async Task<List<SectionContentForUser>> SectionForTrainee(int traineeId)
+    public async Task<User> SectionForTrainee(int traineeId)
     {
         return await _getRepository.SectionForTrainee(traineeId);
     }
+
+ 
 }

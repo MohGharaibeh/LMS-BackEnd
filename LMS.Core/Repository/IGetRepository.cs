@@ -22,5 +22,5 @@ public interface IGetRepository
     Task<List<Userassignment>> Userassignments();
     Task<List<User>> Users();
     Task<List<Section>> SectionForInstructor(int userId);
-    Task<List<SectionContentForUser>> SectionForTrainee(int traineeId);
+    Task<User> SectionForTrainee(int traineeId);
 }

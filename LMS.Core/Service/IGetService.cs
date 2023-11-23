@@ -15,7 +15,8 @@ public interface IGetService
     Task<List<Program>> Programs();
     Task<List<Section>> Sections();
     Task<List<Userassignment>> Userassignments();
+
     Task<List<User>> Users();
     Task<List<Section>> SectionForInstructor(int userId);
-    Task<List<SectionContentForUser>> SectionForTrainee(int traineeId);
+    Task<User> SectionForTrainee(int traineeId);
 }

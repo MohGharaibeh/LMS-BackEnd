@@ -1,6 +1,7 @@
 ﻿using LMS.Core.Repository;
 using LMS.Core.Service;
 using LMS.Data.Data;
+using LMS.Data.DTOs;
 
 namespace LMS.Infra.Service;
 
@@ -13,9 +14,15 @@ public class GetIdService : IGetIdService
         _getId = getId;
     }
 
-    public async Task<Assignment> Assignments(int id)
+    public async Task<List<Assignment>> Assignments(int id)
     {
         return await _getId.Assignments(id);
+    }
+
+
+    public async Task<List<Enrollment>> EnrollmentsBySection(int id)
+    {
+        return await _getId.EnrollmentsBySection(id);
     }
 
     public async Task<Attendance> Attendances(int id)
@@ -31,6 +38,11 @@ public class GetIdService : IGetIdService
     public async Task<Enrollment> Enrollments(int id)
     {
         return await _getId.Enrollments(id);
+    }
+
+    public async Task<IEnumerable<StudentAssingmentsDTO>> GetUserAssignmentsBySectionId(int sectionId, int userId)
+    {
+        return await _getId.GetUserAssignmentsBySectionId(sectionId, userId);
     }
 
     public async Task<Period> Periods(int id)
