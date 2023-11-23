@@ -91,6 +91,12 @@ namespace LMS.API.Controllers
         {
             return await _getIdService.Userassignments(id);
         }
+        [HttpPost]
+        [Route("GetUserGrades/")]
+        public async Task<List<StudentAssingmentsDTO>> GetUserGrades([FromBody] UserAssignmentsRequestDTO request)
+        {
+            return await _getIdService.GetUserGrades(request.SectionId, request.UserId);
+        }
 
 
 

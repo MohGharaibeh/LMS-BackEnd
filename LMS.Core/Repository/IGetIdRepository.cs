@@ -19,6 +19,7 @@ public interface IGetIdRepository
     Task<Plan> Plans(int id);
     Task<Program> Programs(int id);
     Task<Section> Sections(int id);
+    Task<List<StudentAssingmentsDTO>> GetUserGrades(int SectionId, int UserId);
 
     Task<List<Enrollment>> EnrollmentsBySection(int id);
 
