@@ -360,6 +360,32 @@ public class GetIdRepository : IGetIdRepository
         }
     }
 
+
+    public async Task<List<StudentAssingmentsDTO>> GetUserGrades(int SectionId, int UserId)
+    {
+        using (var connection = new OracleConnection(connectionString))
+        {
+            await connection.OpenAsync();
+
+            var p = new DynamicParameters();
+            p.Add("p_sectionid", SectionId,
+                dbType: DbType.Int32,
+                direction: ParameterDirection.Input);
+            
+            p.Add("p_userid", UserId,
+                dbType: DbType.Int32,
+                direction: ParameterDirection.Input);
+
+            var result = _dbContext.Connection.Query<StudentAssingmentsDTO>
+                ("UserAssignmentPackage.GetUserGetUserGradesForSection", p,
+                commandType: CommandType.StoredProcedure);
+
+            connection.Close();
+
+            return result.ToList();
+        }
+    }
+
     public async Task <IEnumerable<StudentAssingmentsDTO>>GetUserAssignmentsBySectionId(int sectionId, int userId)
     {
         using (var connection = new OracleConnection(connectionString))

@@ -1,7 +1,10 @@
-﻿using LMS.Core.Repository;
+﻿using Azure.Core;
+using LMS.Core.Repository;
 using LMS.Core.Service;
 using LMS.Data.Data;
 using LMS.Data.DTOs;
+using static System.Collections.Specialized.BitVector32;
+using Section = LMS.Data.Data.Section;
 
 namespace LMS.Infra.Service;
 
@@ -38,6 +41,10 @@ public class GetIdService : IGetIdService
     public async Task<Enrollment> Enrollments(int id)
     {
         return await _getId.Enrollments(id);
+    }
+    public async Task<List<StudentAssingmentsDTO>> GetUserGrades(int SectionId, int UserId)
+    {
+        return await _getId.GetUserGrades(SectionId, UserId);
     }
 
     public async Task<IEnumerable<StudentAssingmentsDTO>> GetUserAssignmentsBySectionId(int sectionId, int userId)
