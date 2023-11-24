@@ -78,6 +78,10 @@ public class CreateRepository : ICreateRepository
             p.Add("p_userid", attendance.Userid,
                 dbType: DbType.Decimal,
                 direction: ParameterDirection.Input);
+            
+            p.Add("p_enrollmentid", attendance.Enrollmentid,
+                dbType: DbType.Decimal,
+                direction: ParameterDirection.Input);
 
             var result = _dbContext.Connection.Execute
                 ("AttendancePackage.createAttendence",

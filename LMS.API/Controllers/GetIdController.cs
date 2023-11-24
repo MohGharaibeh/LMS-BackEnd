@@ -99,7 +99,12 @@ namespace LMS.API.Controllers
         }
 
 
-
+        [HttpGet]
+        [Route("GetDistinctAttendanceDatesForSection/{id}")]
+        public async Task<List<DateTime>> GetDistinctAttendanceDatesForSection(int id)
+        {
+            return await _getIdService.GetDistinctAttendanceDatesForSection(id);
+        }
 
 
 

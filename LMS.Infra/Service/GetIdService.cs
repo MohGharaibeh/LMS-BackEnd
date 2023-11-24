@@ -28,6 +28,12 @@ public class GetIdService : IGetIdService
         return await _getId.EnrollmentsBySection(id);
     }
 
+
+
+    public async Task<List<DateTime>> GetDistinctAttendanceDatesForSection(int sectionId)
+    {
+        return await _getId.GetDistinctAttendanceDatesForSection(sectionId);
+    }
     public async Task<Attendance> Attendances(int id)
     {
         return await _getId.Attendances(id);

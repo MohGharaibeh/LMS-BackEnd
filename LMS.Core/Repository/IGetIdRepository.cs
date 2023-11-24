@@ -11,6 +11,7 @@ namespace LMS.Core.Repository;
 public interface IGetIdRepository
 {
     Task<List<Assignment>> Assignments(int id);
+    Task<List<DateTime>> GetDistinctAttendanceDatesForSection(int sectionId);
     Task<Attendance> Attendances(int id);
     Task<Course> Courses(int id);
     Task<Enrollment> Enrollments(int id);
@@ -19,6 +20,7 @@ public interface IGetIdRepository
     Task<Plan> Plans(int id);
     Task<Program> Programs(int id);
     Task<Section> Sections(int id);
+
     Task<List<StudentAssingmentsDTO>> GetUserGrades(int SectionId, int UserId);
 
     Task<List<Enrollment>> EnrollmentsBySection(int id);

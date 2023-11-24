@@ -11,6 +11,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace LMS.Infra.Repository;
 
@@ -83,6 +84,33 @@ public class GetIdRepository : IGetIdRepository
         }
 
     }
+
+
+    public async Task<List<DateTime>> GetDistinctAttendanceDatesForSection(int sectionId)
+    {
+        using (var connection = new OracleConnection(connectionString))
+
+        {
+
+            await connection.OpenAsync();
+
+            var p = new DynamicParameters();
+
+            p.Add("p_sectionId", sectionId,
+                dbType: DbType.Int32,
+                direction: ParameterDirection.Input);
+
+            var result = _dbContext.Connection.Query<DateTime>
+                ("AttendancePackage.GetDistinctAttendanceDatesForSection", p,
+                commandType: CommandType.StoredProcedure);
+
+            connection.Close();
+
+            return result.ToList();
+        }
+
+    }
+
 
     public async Task<Attendance> Attendances(int id)
     {

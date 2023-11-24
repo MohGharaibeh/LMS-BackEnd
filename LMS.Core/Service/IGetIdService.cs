@@ -24,6 +24,7 @@ public interface IGetIdService
 
     Task<List<Enrollment>> EnrollmentsBySection(int id);
 
+    Task<List<DateTime>> GetDistinctAttendanceDatesForSection(int sectionId);
 
     Task<Userassignment> Userassignments(int id);
 
