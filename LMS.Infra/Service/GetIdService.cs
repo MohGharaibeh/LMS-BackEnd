@@ -34,7 +34,14 @@ public class GetIdService : IGetIdService
     {
         return await _getId.GetDistinctAttendanceDatesForSection(sectionId);
     }
-    public async Task<Attendance> Attendances(int id)
+
+
+    public async Task<IEnumerable<StudentAssingmentsDTO>> GetUserAssignmentsByAssignmentId(int id)
+    { 
+             return await _getId.GetUserAssignmentsByAssignmentId(id);
+}
+
+public async Task<Attendance> Attendances(int id)
     {
         return await _getId.Attendances(id);
     }

@@ -113,6 +113,14 @@ namespace LMS.API.Controllers
         {
             return await _getIdService.GetUserAssignmentsBySectionId(request.SectionId, request.UserId);
         }
+        
+        
+        
+        [HttpGet("GetUserAssignmentsByAssignmentId/{id}")]
+        public async Task<IEnumerable<StudentAssingmentsDTO>> GetUserAssignmentsByAssignmentId(int id)
+        {
+            return await _getIdService.GetUserAssignmentsByAssignmentId(id);
+        }
 
 
         [HttpGet]

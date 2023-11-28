@@ -27,6 +27,7 @@ public interface IGetIdService
     Task<List<DateTime>> GetDistinctAttendanceDatesForSection(int sectionId);
 
     Task<Userassignment> Userassignments(int id);
+    Task<IEnumerable<StudentAssingmentsDTO>> GetUserAssignmentsByAssignmentId(int id);
 
     Task<IEnumerable<StudentAssingmentsDTO>> GetUserAssignmentsBySectionId(int sectionId, int userId);
 

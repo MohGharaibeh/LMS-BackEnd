@@ -15,6 +15,7 @@ public interface IGetIdRepository
     Task<Attendance> Attendances(int id);
     Task<Course> Courses(int id);
     Task<Enrollment> Enrollments(int id);
+    Task<IEnumerable<StudentAssingmentsDTO>> GetUserAssignmentsByAssignmentId(int id);
     Task<Period> Periods(int id);
     Task<Plancourse> Plancourses(int id);
     Task<Plan> Plans(int id);

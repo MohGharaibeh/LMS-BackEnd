@@ -12,6 +12,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using static System.Collections.Specialized.BitVector32;
+using Section = LMS.Data.Data.Section;
 
 namespace LMS.Infra.Repository;
 
@@ -434,5 +436,27 @@ public class GetIdRepository : IGetIdRepository
 
             return result;
         }
+    }
+
+    public async Task<IEnumerable<StudentAssingmentsDTO>> GetUserAssignmentsByAssignmentId(int id)
+    {
+        using (var connection = new OracleConnection(connectionString))
+        {
+            await connection.OpenAsync();
+
+            var p = new DynamicParameters();
+            p.Add("p_assignmentid", id,
+                dbType: DbType.Int32,
+                direction: ParameterDirection.Input);
+
+            var result = _dbContext.Connection.Query<StudentAssingmentsDTO>
+                ("UserAssignmentPackage.GetUserAssignmentsByAssignmentId", p,
+                commandType: CommandType.StoredProcedure);
+
+            connection.Close();
+
+            return result;
+        }
+
     }
 }
