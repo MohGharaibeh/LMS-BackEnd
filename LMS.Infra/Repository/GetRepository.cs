@@ -28,7 +28,7 @@ public class GetRepository : IGetRepository
         using (var connection = new OracleConnection(connectionString))
         {
             await connection.OpenAsync();
-
+            
             IEnumerable<Assignment> result = _context.Connection.Query<Assignment>
                 ("AssignmentPackage.GetAllAssignment",
                 commandType: CommandType.StoredProcedure);
